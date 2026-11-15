@@ -1,0 +1,15 @@
+{
+  "weather": "CLOUDY_LA",
+  "hour": 12,
+  "density": 1,
+  "presets": [
+    ["Clássico", "classic"],
+    ["Limpo", "EXTRASUNNY_LA"],
+    ["Neblina", "SUNNY_SMOG_LA"],
+    ["Nublado", "CLOUDY_LA"],
+    ["Cinza", "RAINY_SF"],
+    ["Nevoeiro", "FOGGY_SF"],
+    ["Areia", "SANDSTORM_DESERT"]
+  ],
+  "hours": [["Amanhecer", 6], ["Manhã", 9], ["Dia", 12], ["Entardecer", 19]]
+}

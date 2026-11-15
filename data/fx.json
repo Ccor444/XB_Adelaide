@@ -1,0 +1,1 @@
+{"smoke":{"$file":"assets/fx/smoke.png"},"atlas":{"$file":"assets/fx/fx_atlas.webp"},"water":{"$file":"assets/sea/water.webp"},"depth":{"$file":"assets/sea/depth.png"},"sea":{"y":-1.5,"x0":-1500.0,"x1":1400.0,"z0":-1300.0,"z1":1450.0}}

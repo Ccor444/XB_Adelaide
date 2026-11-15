@@ -1,0 +1,11 @@
+{
+ "_info": "Mistura de tipos de espectador. mix = peso de cada tipo (0 = não aparece). Presets são só atalhos do editor. Grupos do GTA SA: data/pedgrp.json",
+ "mix": {
+  "vwfyst1": 1
+ },
+ "presets": {
+  "Só a vwfyst1": {
+   "vwfyst1": 1
+  }
+ }
+}

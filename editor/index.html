@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XB Adelaide · Editor</title>
+<link rel="stylesheet" href="editor.css">
+</head><body>
+<header>
+  <b class="logo">XB<span>Editor</span></b>
+  <nav id="tabs"></nav>
+  <span id="status"></span>
+  <span id="badge" class="warn">sem projeto</span>
+  <button id="btn-help" title="Atalhos de teclado e mouse (?)">⌨ Atalhos</button>
+  <button id="btn-export" title="Baixa o projeto inteiro (com suas alterações) em um .zip">⬇ Exportar .zip</button>
+  <button id="btn-switch" title="Escolher outra pasta/zip">Trocar projeto</button>
+  <a class="btn" id="lnk-game" href="../" target="_blank" hidden>Abrir jogo ↗</a>
+</header>
+<main>
+  <!-- ============ ARQUIVOS ============ -->
+  <section id="tab-files" class="tab">
+    <aside class="side wide">
+      <input id="fl-q" placeholder="Buscar arquivo…" autocomplete="off">
+      <div class="row"><select id="fl-filter"><option value="">Todos os tipos</option><option value="img">Imagens</option><option value="snd">Sons</option><option value="bin">Malhas (.bin)</option><option value="txt">Texto / JSON / código</option><option value="chg">Alterados nesta sessão</option></select></div>
+      <div id="fl-tree" class="tree"></div>
+    </aside>
+    <div class="center">
+      <div class="bar"><span id="fl-title">Selecione um arquivo</span><span class="sp"></span><span id="fl-meta" class="muted"></span></div>
+      <div id="fl-prev" class="prev"></div>
+    </div>
+    <aside class="side right">
+      <h4>Arquivo</h4>
+      <div class="row"><button id="fl-open">Abrir no editor</button><button id="fl-dl">Baixar</button></div>
+      <div class="row"><button id="fl-rep">Substituir…</button><button id="fl-ren">Renomear/mover</button></div>
+      <div class="row"><button id="fl-dup">Duplicar</button><button id="fl-del">Excluir</button></div>
+      <div class="row"><select id="fl-vers"><option value="">Versões anteriores…</option></select><button id="fl-rest">Restaurar</button></div>
+      <input type="file" id="fl-repf" hidden>
+      <h4>Pasta atual: <i id="fl-dir">/</i></h4>
+      <div class="row"><button id="fl-up">Enviar arquivos…</button><button id="fl-new">Novo arquivo de texto…</button></div>
+      <input type="file" id="fl-upf" multiple hidden>
+      <h4>Projeto</h4>
+      <div class="row"><button id="fl-zip">Exportar tudo (.zip)</button><button id="fl-zipc">Exportar só alterados</button></div>
+      <div class="row"><button id="fl-merge">Importar .zip por cima…</button><button id="fl-check" class="pri">Verificar projeto</button></div>
+      <input type="file" id="fl-mergef" accept=".zip" hidden>
+      <div class="hint" id="fl-info"></div>
+      <div id="fl-report" class="report"></div>
+    </aside>
+  </section>
+
+  <!-- ============ TEXTURAS ============ -->
+  <section id="tab-tex" class="tab">
+    <aside class="side">
+      <input id="tx-q" placeholder="Filtrar texturas…" autocomplete="off">
+      <select id="tx-cat"></select>
+      <div id="tx-list" class="grid"></div>
+    </aside>
+    <div class="center" id="tx-center">
+      <div class="bar">
+        <span id="tx-title">Selecione uma textura</span>
+        <span class="sp"></span>
+        <label class="inl"><input type="checkbox" id="tx-chan"> só alfa</label>
+        <button id="tx-fit">Ajustar</button><button id="tx-z1">100%</button>
+        <input id="tx-zoom" type="range" min="-4.3" max="5" step="0.02" value="0" title="Zoom (roda do mouse, + e −)"><span id="tx-zv" class="muted zv">100%</span>
+        <button id="tx-undo">Desfazer</button><button id="tx-redo">Refazer</button>
+      </div>
+      <div id="tx-wrap" class="checker"><canvas id="tx-cv"></canvas></div>
+      <div class="barb"><span id="tx-pos" class="muted">—</span><span class="sp"></span><span id="tx-note" class="muted"></span></div>
+    </div>
+    <aside class="side right" id="tx-tools">
+      <h4>Ferramenta</h4>
+      <div class="seg wrap" id="tx-tool">
+        <button data-k="brush" class="on">Pincel</button><button data-k="erase">Borracha</button><button data-k="pick">Conta-gotas</button><button data-k="fill">Balde</button>
+        <button data-k="line">Linha</button><button data-k="rect">Retângulo</button><button data-k="ellipse">Elipse</button><button data-k="clone">Carimbo</button>
+      </div>
+      <label>Cor <input type="color" id="tx-color" value="#ff7a2e"></label>
+      <label>Tamanho <input type="range" id="tx-size" min="1" max="300" value="16"><i id="tx-sizev">16</i></label>
+      <label>Dureza <input type="range" id="tx-hard" min="0" max="100" value="80"><i id="tx-hardv">80</i></label>
+      <label>Opacidade <input type="range" id="tx-op" min="5" max="100" value="100"></label>
+      <label>Tolerância (balde) <input type="range" id="tx-tol" min="0" max="128" value="24"></label>
+      <label class="chk"><input type="checkbox" id="tx-fillshape"> formas preenchidas</label>
+      <label class="chk"><input type="checkbox" id="tx-seam"> pintar com repetição (mosaico)</label>
+      <div class="hint">Carimbo: Alt+clique define a origem. Roda = zoom · Espaço+arrastar = mover a imagem · 0 = ajustar · 1 = 100%.</div>
+      <h4>Ajustes de cor</h4>
+      <label>Brilho <input type="range" id="tx-br" min="20" max="200" value="100"></label>
+      <label>Contraste <input type="range" id="tx-co" min="20" max="200" value="100"></label>
+      <label>Saturação <input type="range" id="tx-sa" min="0" max="250" value="100"></label>
+      <label>Matiz <input type="range" id="tx-hu" min="-180" max="180" value="0"></label>
+      <div class="row"><button id="tx-apply">Aplicar ajustes</button><button id="tx-reset">Zerar</button></div>
+      <h4>Transformar</h4>
+      <div class="row"><button id="tx-fh">Espelhar H</button><button id="tx-fv">Espelhar V</button><button id="tx-rot">Girar 90°</button></div>
+      <div class="row"><button id="tx-inv">Inverter cores</button><button id="tx-gray">Cinza</button><button id="tx-blur">Suavizar</button><button id="tx-sharp">Nitidez</button></div>
+      <div class="row"><button id="tx-offs">Deslocar (mosaico)…</button><button id="tx-keyout">Cor → transparente</button></div>
+      <div class="xyz"><span>Tamanho</span><input id="tx-rw"><input id="tx-rh"><button id="tx-resize">OK</button></div>
+      <label class="chk"><input type="checkbox" id="tx-lock" checked> manter proporção</label>
+      <h4>Arquivo</h4>
+      <label class="chk"><input type="checkbox" id="tx-newsize"> usar tamanho do arquivo novo</label>
+      <div class="row"><button id="tx-replace">Substituir por imagem…</button><button id="tx-export">Baixar</button></div>
+      <input type="file" id="tx-file" accept="image/*" hidden>
+      <label>Qualidade (jpg/webp) <input type="range" id="tx-q2" min="50" max="100" value="92"></label>
+      <div class="row"><button id="tx-save" class="pri">Salvar no jogo</button><button id="tx-reload">Recarregar</button></div>
+      <div class="row"><button id="tx-saveas">Salvar como PNG novo…</button></div>
+      <div class="row"><select id="tx-vers"><option value="">Versões anteriores…</option></select><button id="tx-restore">Restaurar</button></div>
+      <h4>Mosaico</h4>
+      <div id="tx-tile"></div>
+      <div class="hint" id="tx-used"></div>
+    </aside>
+  </section>
+
+  <!-- ============ MODELOS ============ -->
+  <section id="tab-mdl" class="tab">
+    <aside class="side">
+      <select id="md-model"></select>
+      <select id="md-skin" title="Pintura usada na prévia do carro"></select>
+      <input id="md-q" placeholder="Filtrar peças…" autocomplete="off">
+      <div class="row"><button id="md-showall">Mostrar tudo</button><button id="md-hideoth">Isolar peça</button></div>
+      <div id="md-list" class="list"></div>
+    </aside>
+    <div class="center">
+      <div class="bar"><span id="md-title">—</span><span class="sp"></span><span id="md-info"></span>
+        <label class="inl"><input type="checkbox" id="md-wire"> malha</label><label class="inl"><input type="checkbox" id="md-flat"> sem textura</label>
+        <button id="md-undo">Desfazer</button><button id="md-frame">Enquadrar</button></div>
+      <canvas id="md-cv"></canvas>
+      <div id="md-load"></div>
+    </div>
+    <aside class="side right" id="md-tools">
+      <h4>Peça selecionada: <i id="md-sel">nenhuma</i></h4>
+      <div id="md-selinfo" class="muted"></div>
+      <label>Nome <input id="md-name"></label>
+      <label>Textura <select id="md-tex"></select></label>
+      <label>Categoria <select id="md-cat"><option>opaque</option><option>alpha</option><option>shadow</option></select></label>
+      <label>Material <select id="md-mat"><option value="">(automático)</option><option value="body">carroceria</option><option value="wheel">roda</option><option value="gls">vidro gls</option><option value="gtx">vidro gtx</option></select></label>
+      <h4>Transformar</h4>
+      <div class="xyz"><span>Mover</span><input id="m-tx" value="0"><input id="m-ty" value="0"><input id="m-tz" value="0"></div>
+      <div class="xyz"><span>Girar °</span><input id="m-rx" value="0"><input id="m-ry" value="0"><input id="m-rz" value="0"></div>
+      <div class="xyz"><span>Escala</span><input id="m-sx" value="1"><input id="m-sy" value="1"><input id="m-sz" value="1"></div>
+      <label class="chk"><input type="checkbox" id="m-piv" checked> pivô no centro da peça</label>
+      <div class="row"><button id="md-apply" class="pri">Aplicar</button><button id="md-dup">Duplicar c/ valores</button></div>
+      <div class="row"><button id="md-mx">Espelhar X</button><button id="md-my">Espelhar Y</button><button id="md-mz">Espelhar Z</button></div>
+      <div class="row"><button id="md-nflip">Inverter normais</button><button id="md-center">Levar ao chão (Y=0)</button></div>
+      <div class="row"><button id="md-del">Excluir peça</button><button id="md-objx">Exportar OBJ</button></div>
+      <div class="row" id="md-solidrow"><select id="md-solidsurf"><option value="0">asfalto</option><option value="1">grama</option><option value="2">cascalho</option><option value="3">zebra</option></select><button id="md-solid" title="Copia os triângulos desta peça para a colisão (assets/track/phy.*)">Tornar sólida</button></div>
+      <h4>Adicionar</h4>
+      <div class="row"><select id="ad-kind"><option value="box">Caixa</option><option value="plane">Plano</option><option value="cyl">Cilindro</option><option value="ramp">Rampa</option></select>
+        <input id="ad-w" value="2" title="largura"><input id="ad-h" value="2" title="altura"><input id="ad-d" value="2" title="profundidade"></div>
+      <div class="xyz"><span>Posição</span><input id="ad-x" value="0"><input id="ad-y" value="0"><input id="ad-z" value="0"></div>
+      <div class="row"><label class="chk"><input type="checkbox" id="ad-cam" checked> na mira da câmera</label><label>UV ×<input id="ad-uv" value="1"></label></div>
+      <div class="row"><button id="md-add">Adicionar primitiva</button><button id="md-objin">Importar OBJ…</button></div>
+      <input type="file" id="md-objfile" accept=".obj" hidden>
+      <div class="row"><label>Escala OBJ<input id="ob-s" value="1"></label><label class="chk"><input type="checkbox" id="ob-fv" checked> inverter V</label></div>
+      <div class="hint" id="md-hint"></div>
+      <div class="row"><button id="md-save" class="pri">Salvar modelo</button><button id="md-reload">Recarregar</button></div>
+    </aside>
+  </section>
+
+  <!-- ============ COLISÃO ============ -->
+  <section id="tab-coll" class="tab">
+    <aside class="side">
+      <h4>Exibir</h4>
+      <div id="co-show" class="chips"></div>
+      <label>Pista visual <select id="co-ghost"><option value="off">oculta</option><option value="wire" selected>malha</option><option value="solid">sólida</option></select></label>
+      <label class="chk"><input type="checkbox" id="co-walls" checked> destacar paredes (inclinação &gt; 70°)</label>
+      <label class="chk"><input type="checkbox" id="co-edges"> contorno dos triângulos</label>
+      <h4>Seleção</h4>
+      <div class="seg wrap" id="co-tool"><button data-k="tri" class="on">Triângulo</button><button data-k="brush">Pincel</button><button data-k="conn">Conectados</button><button data-k="pan">Só câmera</button></div>
+      <label>Raio do pincel (m) <input type="range" id="co-r" min="0.5" max="60" step="0.5" value="6"><i id="co-rv">6</i></label>
+      <div class="row"><button id="co-all">Tudo</button><button id="co-none">Nada</button><button id="co-inv">Inverter</button></div>
+      <div class="row"><button id="co-bysurf">Por superfície</button><button id="co-bywall">Paredes</button></div>
+      <div class="hint">Clique = selecionar · Shift = somar · Alt = subtrair · botão direito/Shift+arrastar/Espaço = mover câmera · roda = zoom no cursor · 1-4 = vistas · F = enquadrar</div>
+      <h4>Estatísticas</h4>
+      <div id="co-stats" class="hint"></div>
+    </aside>
+    <div class="center">
+      <div class="bar"><span>Colisão do carro (assets/track/phy.*)</span><span class="sp"></span><span id="co-info"></span><button id="co-undo">Desfazer</button><button id="co-redo">Refazer</button><button id="co-frame">Enquadrar</button><button id="co-save" class="pri">Salvar colisão</button></div>
+      <canvas id="co-cv"></canvas>
+      <div id="co-load"></div>
+    </div>
+    <aside class="side right">
+      <h4>Selecionados: <i id="co-n">0</i></h4>
+      <div class="row" id="co-setsurf"></div>
+      <div class="row"><button id="co-del">Excluir triângulos</button><button id="co-sep">Separar (copiar vértices)</button></div>
+      <h4>Mover / ajustar</h4>
+      <div class="xyz"><span>Δ x,y,z</span><input id="co-dx" value="0"><input id="co-dy" value="0"><input id="co-dz" value="0"></div>
+      <div class="row"><button id="co-move" class="pri">Mover seleção</button><button id="co-up">↑ +0,1</button><button id="co-dn">↓ −0,1</button></div>
+      <div class="row"><button id="co-flat">Nivelar (altura média)</button><button id="co-smooth">Suavizar alturas</button></div>
+      <label class="chk"><input type="checkbox" id="co-weld" checked> mover vértices compartilhados com vizinhos</label>
+      <h4>Adicionar geometria</h4>
+      <div class="row"><select id="co-pk"><option value="plane">Chão (plano)</option><option value="box">Caixa sólida</option><option value="wall">Parede</option><option value="ramp">Rampa</option></select><select id="co-ps"></select></div>
+      <div class="xyz"><span>Tamanho</span><input id="co-pw" value="10"><input id="co-ph" value="2"><input id="co-pd" value="10"></div>
+      <div class="xyz"><span>Girar Y°</span><input id="co-pr" value="0"></div>
+      <div class="row"><button id="co-padd">Adicionar na mira</button></div>
+      <div class="row"><button id="co-objin">Importar OBJ…</button><button id="co-objx">Exportar OBJ</button></div>
+      <input type="file" id="co-objfile" accept=".obj" hidden>
+      <div class="row"><button id="co-regen">Regenerar da pista visual…</button></div>
+      <div class="hint">Terreno: triângulos com inclinação &lt; 70° são chão (têm superfície); acima disso viram parede. A colisão é independente da malha visual.</div>
+      <div class="row"><button id="co-reload">Recarregar do disco</button></div>
+    </aside>
+  </section>
+
+  <!-- ============ TRAÇADO ============ -->
+  <section id="tab-path" class="tab">
+    <div class="center full">
+      <div class="bar"><span>Traçado da IA / linha de corrida</span><span class="sp"></span>
+        <button id="pt-fit" title="Enquadrar a pista (F)">Enquadrar</button><button id="pt-ins" title="Inserir ponto depois do selecionado (I)">Inserir ponto</button><button id="pt-del" title="Remover selecionados (Delete)">Remover ponto</button><button id="pt-start">Definir largada</button><button id="pt-rev">Inverter sentido</button><button id="pt-y">Altura pelo asfalto</button><button id="pt-undo" title="Ctrl+Z">Desfazer</button><button id="pt-redo" title="Ctrl+Y">Refazer</button><button id="pt-png" title="Baixa o mapa como imagem">Imagem</button><button id="pt-save" class="pri">Salvar traçado</button></div>
+      <div id="pt-wrap"><canvas id="pt-cv"></canvas><div id="pt-load"></div></div>
+      <div class="barb"><span id="pt-pos" class="muted">—</span><span class="sp"></span><span id="pt-selinfo" class="muted"></span></div>
+    </div>
+    <aside class="side right">
+      <h4>Ponto <i id="pt-n">—</i></h4>
+      <label>X <input id="pt-x"></label><label>Y (altura) <input id="pt-yv"></label><label>Z <input id="pt-z"></label>
+      <label>Largura esquerda <input id="pt-wl"></label><label>Largura direita <input id="pt-wr"></label>
+      <label>Vel. máx. (m/s, 999 = livre) <input id="pt-vm"></label>
+      <div class="hint" id="pt-multi" hidden>Vários pontos selecionados: largura, altura e velocidade valem para todos eles.</div>
+      <h4>Vários pontos</h4>
+      <div class="row"><button id="pt-all">Selecionar todos</button><button id="pt-none">Limpar seleção</button></div>
+      <div class="row"><button id="pt-wall">Largura de todos…</button><button id="pt-smooth">Suavizar traçado</button></div>
+      <h4>Camadas</h4>
+      <label class="chk"><input type="checkbox" id="pt-l-bg" checked> mapa da pista</label>
+      <label class="chk"><input type="checkbox" id="pt-coll"> colisão (cores por superfície)</label>
+      <label class="chk"><input type="checkbox" id="pt-l-grid" checked> grade e escala</label>
+      <label class="chk"><input type="checkbox" id="pt-l-w" checked> larguras (esq./dir.)</label>
+      <label class="chk"><input type="checkbox" id="pt-l-edge"> bordas da pista</label>
+      <label class="chk"><input type="checkbox" id="pt-l-arr" checked> setas de sentido</label>
+      <label class="chk"><input type="checkbox" id="pt-l-num"> números dos pontos</label>
+      <label class="chk"><input type="checkbox" id="pt-l-spd"> cor pela velocidade (vermelho = lento)</label>
+      <div class="hint">Roda = zoom no cursor · arrastar o fundo (ou botão do meio / Espaço) = mover · Shift+arrastar = seleção em caixa · duplo clique na linha = novo ponto · setas movem · ? mostra todos os atalhos. O ponto 0 é a largada. Cores do mapa: cinza = asfalto, verde = grama, laranja = zebra, escuro = resto.</div>
+      <div class="hint" id="pt-stat"></div>
+    </aside>
+  </section>
+
+  <!-- ============ SONS ============ -->
+  <section id="tab-snd" class="tab">
+    <aside class="side"><input id="sn-q" placeholder="Filtrar sons…"><div id="sn-list" class="list"></div>
+      <div class="row"><button id="sn-new">Importar som novo…</button></div><input type="file" id="sn-newf" accept="audio/*" hidden></aside>
+    <div class="center">
+      <div class="bar"><span id="sn-title">Selecione um som</span><span class="sp"></span>
+        <label class="inl"><input type="checkbox" id="sn-loop"> loop</label><button id="sn-play">▶ Tocar</button><button id="sn-stop">■</button><button id="sn-undo">Desfazer</button></div>
+      <div id="sn-wrap"><canvas id="sn-cv" width="1400" height="300"></canvas></div>
+      <div class="pad" id="sn-info"></div>
+      <div class="pad muted" id="sn-use"></div>
+    </div>
+    <aside class="side right">
+      <h4>Editar</h4>
+      <label>Ganho % <input type="range" id="sn-gain" min="10" max="400" value="100"><i id="sn-gainv">100</i></label>
+      <label>Cortar início (s) <input id="sn-t0" value="0"></label>
+      <label>Cortar fim (s) <input id="sn-t1" value="0"></label>
+      <div class="row"><button id="sn-norm">Normalizar</button><button id="sn-apply" class="pri">Aplicar</button></div>
+      <h4>Efeitos</h4>
+      <label>Fade in (ms) <input id="sn-fi" value="0"></label><label>Fade out (ms) <input id="sn-fo" value="0"></label>
+      <div class="row"><button id="sn-fade">Aplicar fades</button><button id="sn-rev">Inverter</button><button id="sn-mono">Mono</button></div>
+      <label>Emendar loop (ms) <input id="sn-xf" value="120"></label>
+      <div class="row"><button id="sn-loopfix">Tornar loop contínuo</button><button id="sn-trim">Cortar silêncio</button></div>
+      <label>Velocidade/tom ×<input id="sn-rate" value="1"></label>
+      <div class="row"><button id="sn-resample">Aplicar velocidade</button><button id="sn-sr">Taxa 22/44 kHz</button></div>
+      <h4>Arquivo</h4>
+      <div class="row"><button id="sn-replace">Substituir por áudio…</button><button id="sn-dl">Baixar</button></div>
+      <input type="file" id="sn-file" accept="audio/*" hidden>
+      <div class="row"><button id="sn-save" class="pri">Salvar no jogo</button><button id="sn-reload">Recarregar</button></div>
+      <div class="row"><select id="sn-vers"><option value="">Versões anteriores…</option></select><button id="sn-restore">Restaurar</button></div>
+      <div class="hint">Sons de motor e pneus tocam em loop: o final precisa emendar com o começo. Curvas de volume/tom: aba Configurações → Som.</div>
+    </aside>
+  </section>
+
+  <!-- ============ CONFIGURAÇÕES ============ -->
+  <section id="tab-cfg" class="tab">
+    <aside class="side"><div id="cf-nav" class="list"></div></aside>
+    <div class="center"><div class="bar"><span id="cf-title">Configurações</span><span class="sp"></span><span id="cf-msg" class="muted"></span><button id="cf-reload">Recarregar</button><button id="cf-save" class="pri">Salvar (Ctrl+S)</button></div>
+      <div id="cf-body" class="form"></div></div>
+  </section>
+
+  <!-- ============ CÓDIGO ============ -->
+  <section id="tab-code" class="tab">
+    <aside class="side"><input id="cd-q" placeholder="Filtrar arquivos…"><div id="cd-list" class="list"></div>
+      <h4>Buscar em todos</h4><input id="cd-find" placeholder="texto ou /regex/"><input id="cd-repl" placeholder="substituir por…">
+      <div class="row"><button id="cd-fall">Buscar</button><button id="cd-rall">Substituir tudo</button></div>
+      <div id="cd-res" class="list small"></div></aside>
+    <div class="center">
+      <div class="bar"><span id="cd-title">Selecione um arquivo</span><span class="sp"></span><span id="cd-msg"></span><button id="cd-chk">Verificar</button><button id="cd-fmt">Formatar JSON</button><button id="cd-ver">Versões</button><button id="cd-save" class="pri">Salvar (Ctrl+S)</button></div>
+      <div id="cd-ed"><pre id="cd-gut" aria-hidden="true"></pre><textarea id="cd-ta" spellcheck="false" wrap="off"></textarea></div>
+      <div class="barb"><input id="cd-ff" placeholder="localizar neste arquivo (Enter = próximo)"><input id="cd-fr" placeholder="trocar por"><button id="cd-fnext">Próximo</button><button id="cd-frep">Trocar</button><button id="cd-frall">Trocar todos</button><button id="cd-goto">Ir p/ linha…</button></div>
+    </div>
+  </section>
+
+  <!-- ============ JOGO ============ -->
+  <section id="tab-game" class="tab">
+    <div class="center full">
+      <div class="bar"><span>Prévia ao vivo (usa os arquivos salvos no projeto)</span><span class="sp"></span><span id="gm-msg" class="muted"></span><button id="gm-reload" class="pri">Recarregar jogo</button></div>
+      <iframe id="gm-fr" allow="autoplay; fullscreen"></iframe>
+    </div>
+  </section>
+</main>
+
+<div id="open" class="overlay on"><div class="card">
+  <h2>XB<span>Editor</span></h2>
+  <p>Edite texturas, modelos 3D, colisão, sons, física e código do jogo.</p>
+  <p id="op-msg">Procurando o projeto…</p>
+  <div class="col">
+    <button id="op-last" class="pri" hidden></button>
+    <button id="op-dir" class="pri" hidden>📁 Abrir pasta do jogo… <small>(lê e grava direto nos arquivos)</small></button>
+    <button id="op-zip">🗜 Abrir o .zip do projeto… <small>(edita na memória, exporta .zip)</small></button>
+    <button id="op-files">📂 Abrir pasta pelo navegador… <small>(edita na memória, exporta .zip)</small></button>
+    <small id="op-nopick" hidden>Dica: no Chrome/Edge o botão “Abrir pasta” grava direto no disco. Também dá para arrastar o .zip para cá.</small>
+  </div>
+  <input type="file" id="op-zipf" accept=".zip" hidden><input type="file" id="op-dirf" webkitdirectory multiple hidden>
+</div></div>
+<div id="toast"></div>
+<script src="editor.js"></script>
+<script src="ui.js"></script>
+<script src="zip.js"></script>
+<script src="dds.js"></script>
+<script src="fs.js"></script>
+<script src="files.js"></script>
+<script src="tex.js"></script>
+<script src="viewer.js"></script>
+<script src="model.js"></script>
+<script src="coll.js"></script>
+<script src="path.js"></script>
+<script src="snd.js"></script>
+<script src="curve.js"></script>
+<script src="cfg.js"></script>
+<script src="code.js"></script>
+</body></html>

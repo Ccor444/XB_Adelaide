@@ -1,0 +1,628 @@
+{
+ "groups": [
+  {
+   "name": "WORKERS",
+   "region": "LA",
+   "models": [
+    "hmogar",
+    "wmycon",
+    "wmyconb",
+    "wmymech",
+    "wmysgrd"
+   ]
+  },
+  {
+   "name": "WORKERS",
+   "region": "SF",
+   "models": [
+    "wmycon",
+    "wmyconb",
+    "wmysgrd",
+    "swmocd",
+    "hmogar"
+   ]
+  },
+  {
+   "name": "WORKERS",
+   "region": "VEGAS",
+   "models": [
+    "wmycon",
+    "wmyconb",
+    "hmogar",
+    "wmysgrd",
+    "vbmocd"
+   ]
+  },
+  {
+   "name": "BUSINESS",
+   "region": "LA",
+   "models": [
+    "bmyri",
+    "bmybu",
+    "bfybu",
+    "bfyri",
+    "bmyri",
+    "bfyri",
+    "hfyri",
+    "hmyri",
+    "hfyri",
+    "hmyri",
+    "omyri",
+    "omyri",
+    "sofybu",
+    "wfyri",
+    "wmyri",
+    "wmybu",
+    "wfybu"
+   ]
+  },
+  {
+   "name": "BUSINESS",
+   "region": "SF",
+   "models": [
+    "sbmyri",
+    "somobu",
+    "somybu",
+    "bmybu",
+    "bfybu",
+    "sbfyri",
+    "sbmyri",
+    "hfyri",
+    "hmyri",
+    "hfyri",
+    "hmyri",
+    "somyri",
+    "somyri",
+    "sofybu",
+    "swfyri",
+    "swmyri",
+    "wmybu",
+    "wfybu"
+   ]
+  },
+  {
+   "name": "BUSINESS",
+   "region": "VEGAS",
+   "models": [
+    "bmyri",
+    "bmybu",
+    "bfybu",
+    "bfyri",
+    "bmyri",
+    "bfyri",
+    "hfyri",
+    "hmyri",
+    "hfyri",
+    "hmyri",
+    "omyri",
+    "omyri",
+    "wfyri",
+    "wmyri",
+    "wmybu",
+    "wfybu"
+   ]
+  },
+  {
+   "name": "CLUBBERS",
+   "region": "LA",
+   "models": [
+    "bfyri",
+    "bmyri",
+    "bmyst",
+    "omost",
+    "omyst",
+    "ofyst",
+    "wmyst",
+    "wfyst",
+    "hfyri",
+    "hmyri",
+    "omyri",
+    "wfyri",
+    "wmyri",
+    "wmyboun"
+   ]
+  },
+  {
+   "name": "CLUBBERS",
+   "region": "SF",
+   "models": [
+    "swmyhp1",
+    "swmyhp2",
+    "sbmyst",
+    "somost",
+    "omyst",
+    "sofyst",
+    "swmyst",
+    "swfyst",
+    "sbfyri",
+    "sbmyri",
+    "hfyri",
+    "hmyri",
+    "somyri",
+    "swfyri",
+    "swmyri",
+    "wmyboun"
+   ]
+  },
+  {
+   "name": "CLUBBERS",
+   "region": "VEGAS",
+   "models": [
+    "bmyst",
+    "omost",
+    "omyst",
+    "ofyst",
+    "wmyst",
+    "wfyst",
+    "bfyri",
+    "bmyri",
+    "hfyri",
+    "hmyri",
+    "omyri",
+    "wfyri",
+    "wmyri",
+    "wmyboun"
+   ]
+  },
+  {
+   "name": "FARMERS",
+   "region": "LA",
+   "models": [
+    "cwfofr",
+    "cwfohb",
+    "cwfyfr1",
+    "cwfyfr2",
+    "cwfyhb",
+    "cwmofr",
+    "cwmohb1",
+    "cwmohb2",
+    "cwmyfr",
+    "cwmyhb1",
+    "cwmyhb2"
+   ]
+  },
+  {
+   "name": "BEACHFOLK",
+   "region": "LA",
+   "models": [
+    "bfybe",
+    "bmybe",
+    "hfybe",
+    "hmybe",
+    "wfybe",
+    "wmybe",
+    "wfyro",
+    "wmyro",
+    "wfylg"
+   ]
+  },
+  {
+   "name": "PARKFOLK",
+   "region": "LA",
+   "models": [
+    "wmyjg",
+    "wfyjg",
+    "wmybp",
+    "bmymoun",
+    "wmymoun",
+    "bfybe",
+    "hfybe"
+   ]
+  },
+  {
+   "name": "PARKFOLK",
+   "region": "SF",
+   "models": [
+    "swmyhp1",
+    "swmyhp2",
+    "wmyjg",
+    "wfyjg",
+    "wmybp",
+    "bmymoun",
+    "wmymoun"
+   ]
+  },
+  {
+   "name": "PARKFOLK",
+   "region": "VEGAS",
+   "models": [
+    "wmyjg",
+    "wfyjg",
+    "wmybp",
+    "bmymoun",
+    "wmymoun",
+    "wfybe",
+    "bfybe"
+   ]
+  },
+  {
+   "name": "CASUAL_RICH",
+   "region": "LA",
+   "models": [
+    "bfori",
+    "bfyri",
+    "bmori",
+    "bmyri",
+    "hfori",
+    "hfyri",
+    "hmori",
+    "hmyri",
+    "ofori",
+    "omyri",
+    "omori",
+    "ofyri",
+    "wfyri",
+    "wmyri",
+    "wmori",
+    "wfori",
+    "wmybu",
+    "wfybu"
+   ]
+  },
+  {
+   "name": "CASUAL_RICH",
+   "region": "SF",
+   "models": [
+    "sbfori",
+    "sbfyri",
+    "sbmori",
+    "sbmyri",
+    "hfori",
+    "hfyri",
+    "hmori",
+    "hmyri",
+    "sofori",
+    "somyri",
+    "somori",
+    "sofyri",
+    "swfyri",
+    "swmyri",
+    "swmori",
+    "swfori",
+    "wmybu",
+    "wfybu"
+   ]
+  },
+  {
+   "name": "CASUAL_RICH",
+   "region": "VEGAS",
+   "models": [
+    "bfori",
+    "bfyri",
+    "bmori",
+    "bmyri",
+    "hfori",
+    "hfyri",
+    "hmori",
+    "hmyri",
+    "ofori",
+    "omyri",
+    "omori",
+    "ofyri",
+    "wfyri",
+    "wmyri",
+    "wmori",
+    "wfori",
+    "wmybu",
+    "wfybu",
+    "wmyva"
+   ]
+  },
+  {
+   "name": "CASUAL_AVERAGE",
+   "region": "LA",
+   "models": [
+    "bmydj",
+    "bfyst",
+    "bmyst",
+    "bfost",
+    "omost",
+    "ofyst",
+    "omyst",
+    "hfyst",
+    "hmyst",
+    "hmost",
+    "wfyst",
+    "wmyst",
+    "wmost",
+    "smyst",
+    "smyst2"
+   ]
+  },
+  {
+   "name": "CASUAL_AVERAGE",
+   "region": "SF",
+   "models": [
+    "sbmost",
+    "sbfyst",
+    "sbmyst",
+    "somost",
+    "sofyst",
+    "somyst",
+    "hfyst",
+    "hmyst",
+    "hmost",
+    "swfyst",
+    "swmyst",
+    "wmost"
+   ]
+  },
+  {
+   "name": "CASUAL_AVERAGE",
+   "region": "VEGAS",
+   "models": [
+    "bfyst",
+    "bmyst",
+    "omost",
+    "ofyst",
+    "omyst",
+    "hfyst",
+    "hmyst",
+    "hmost",
+    "wfyst",
+    "wmyst",
+    "wmost"
+   ]
+  },
+  {
+   "name": "CASUAL_POOR",
+   "region": "LA",
+   "models": [
+    "bfyst",
+    "bmyst",
+    "bmotr1",
+    "bmydj",
+    "bmost",
+    "hfyst",
+    "hmyst",
+    "hmost",
+    "hfost",
+    "omyst",
+    "ofyst",
+    "ofost",
+    "omost",
+    "ofyst",
+    "omyst",
+    "wfyst",
+    "wfyst",
+    "wmyst",
+    "wmost",
+    "wfost",
+    "wmotr1"
+   ]
+  },
+  {
+   "name": "CASUAL_POOR",
+   "region": "SF",
+   "models": [
+    "sbfost",
+    "sbfyst",
+    "sbmyst",
+    "somyst",
+    "sofyst",
+    "sofost",
+    "somost",
+    "sofyst",
+    "somyst",
+    "swfyst",
+    "swmost",
+    "swfost",
+    "swmyhp1",
+    "swmyhp2",
+    "sbmotr2",
+    "swmotr1",
+    "swmotr2",
+    "swmotr3",
+    "sbmytr3",
+    "swmotr4",
+    "swmotr5"
+   ]
+  },
+  {
+   "name": "CASUAL_POOR",
+   "region": "VEGAS",
+   "models": [
+    "vwmycd",
+    "bmost",
+    "bfyst",
+    "bmyst",
+    "hfyst",
+    "hmyst",
+    "hmost",
+    "hfost",
+    "omyst",
+    "ofyst",
+    "ofost",
+    "omost",
+    "ofyst",
+    "omyst",
+    "wfyst",
+    "wfyst",
+    "wmyst",
+    "wmost",
+    "vwmotr1",
+    "vwmotr2"
+   ]
+  },
+  {
+   "name": "PROSTITUTES",
+   "region": "LA",
+   "models": [
+    "bfypro",
+    "hfypro",
+    "wfypro",
+    "sfypro"
+   ]
+  },
+  {
+   "name": "PROSTITUTES",
+   "region": "SF",
+   "models": [
+    "swfopro",
+    "sbfypro",
+    "shfypro"
+   ]
+  },
+  {
+   "name": "PROSTITUTES",
+   "region": "VEGAS",
+   "models": [
+    "vwfypro",
+    "vbfypro",
+    "vhfypro"
+   ]
+  },
+  {
+   "name": "CRIMINALS",
+   "region": "LA",
+   "models": [
+    "bmycr",
+    "hmycr",
+    "wmycr"
+   ]
+  },
+  {
+   "name": "CRIMINALS",
+   "region": "SF",
+   "models": [
+    "sbmycr",
+    "shmycr",
+    "swmycr"
+   ]
+  },
+  {
+   "name": "CRIMINALS",
+   "region": "VEGAS",
+   "models": [
+    "vbmycr",
+    "vhmycr",
+    "vwmycr"
+   ]
+  },
+  {
+   "name": "GOLFERS",
+   "region": "LA",
+   "models": [
+    "wmygol1",
+    "wmygol2"
+   ]
+  },
+  {
+   "name": "SERVANTS",
+   "region": "LA",
+   "models": [
+    "wmyva",
+    "wbdyg1",
+    "wbdyg2",
+    "hmogar"
+   ]
+  },
+  {
+   "name": "SERVANTS",
+   "region": "LA",
+   "models": [
+    "wmyva",
+    "wbdyg1",
+    "wbdyg2",
+    "hmogar"
+   ]
+  },
+  {
+   "name": "SERVANTS",
+   "region": "LA",
+   "models": [
+    "wmyva",
+    "wbdyg1",
+    "wbdyg2",
+    "hmogar"
+   ]
+  },
+  {
+   "name": "AIRCREW",
+   "region": "LA",
+   "models": [
+    "bmyap",
+    "wmyplt",
+    "wfystew"
+   ]
+  },
+  {
+   "name": "AIRCREW",
+   "region": "LA",
+   "models": [
+    "bmyap",
+    "wmyplt",
+    "wfystew"
+   ]
+  },
+  {
+   "name": "AIRCREW",
+   "region": "LA",
+   "models": [
+    "bmyap",
+    "wmyplt",
+    "wfystew"
+   ]
+  },
+  {
+   "name": "ENTERTAINERS",
+   "region": "LA",
+   "models": [
+    "bmydj"
+   ]
+  },
+  {
+   "name": "ENTERTAINERS",
+   "region": "LA",
+   "models": [
+    "bmydj"
+   ]
+  },
+  {
+   "name": "ENTERTAINERS",
+   "region": "LA",
+   "models": [
+    "vhmyelv",
+    "vbmyelv",
+    "vimyelv"
+   ]
+  },
+  {
+   "name": "OUT_OF_TOWN_FACTORY_WORKERS",
+   "region": "LA",
+   "models": [
+    "wmycon",
+    "wmyconb",
+    "wmymech"
+   ]
+  },
+  {
+   "name": "DESERT_FOLK",
+   "region": "LA",
+   "models": [
+    "dwfolc",
+    "dwfylc1",
+    "dwfylc2",
+    "dwmolc1",
+    "dwmolc2",
+    "dwmylc1",
+    "dwmylc2",
+    "dnfolc1",
+    "dnfolc2",
+    "dnfylc",
+    "dnmolc1",
+    "dnmolc2",
+    "dnmylc"
+   ]
+  },
+  {
+   "name": "AIRCREW_RUNWAY",
+   "region": "LA",
+   "models": [
+    "bmyap",
+    "wmyplt",
+    "wfystew"
+   ]
+  }
+ ]
+}
